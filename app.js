@@ -12,8 +12,6 @@ document.getElementById("bored__idea-btn").addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      document.getElementById("bored__idea-text").innerHTML = `
-        ${data.activity}
-      `;
+      document.getElementById("bored__idea-text").innerHTML = data.activity;
     });
 });
