@@ -17,6 +17,11 @@ body, html {
   height: 100vh;
 }
 
+header {
+  margin: 0;
+  padding: 0;
+}
+
 img {
   max-width: 100%
 }
@@ -25,6 +30,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 .container-main {
@@ -35,9 +42,8 @@ img {
   padding: 3em 0;
   background-color: rgb(143, 142, 142);
   border-bottom: 2px solid #373e4b;
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.836);
+  margin: 0;
 }
 
 .bored__bot-header--fun {
@@ -48,8 +54,25 @@ img {
 
 }
 
+.bored__bot-header--repeat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
 .bored__bot-title {
   font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.bored__bot-header-text {
+  font-size: 1.1rem;
+  margin: -1rem 0 0 0;
+  padding: 0;
+
 }
 
 .bored__idea-container {
