@@ -8,4 +8,53 @@
 
 body, html {
   font-family: "Poppins", sans-serif;
+  background: #F7F8F8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ACBB78, #F7F8F8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #ACBB78, #F7F8F8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header__wrapper {
+  position: sticky;
+  top: 0;
+}
+
+.blog__nav {
+  width: 100%;
+  background: #8e9eab;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 2em 1em;
+  border-bottom: 1px dashed gray;
+  box-shadow: 0 0 20px 10px #999;
+}
+
+.main__container {
+  margin-top: 0.25em;
+  max-width: 800px;
+}
+
+#main__blog-post {
+  width: 90%;
+  padding: 0 3em;
+}
+
+#main__blog-post > h3 {
+  margin: 1.75em 0 0.275em;
+  text-transform: uppercase;
+}
+
+#main__blog-post > p {
+  padding-bottom: 1.75em;
+  border-bottom: 1px dashed gray;
+}
+
+#main__blog-post > p:last-child {
+  border: none;
 }
