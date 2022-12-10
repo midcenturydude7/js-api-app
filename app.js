@@ -1,19 +1,76 @@
-document.getElementById("bored__idea-btn").addEventListener("click", () => {
-  fetch("https://apis.scrimba.com/bored/api/activity")
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById("bored__idea-text").innerHTML = data.activity;
-      const grabElement = document.querySelector(".bored__bot-header");
-      grabElement.classList.add("bored__bot-header--fun");
-      addText();
+const urlPost = "https://apis.scrimba.com/jsonplaceholder/posts";
+const urlTodos = "https://apis.scrimba.com/jsonplaceholder/todos";
+const titleInput = document.getElementById("post-title");
+const bodyInput = document.getElementById("post-body");
+const form = document.getElementById("new-post");
+let postsArray = [];
+
+// Weather vars
+const urlWeather =
+  "https://apis.scrimba.com/openweathermap/data/2.5/weather?q=portland&units=imperial";
+
+const renderPosts = () => {
+  let html = "";
+  for (let post of postsArray) {
+    html += `
+      <h3>${post.title}</h3>
+      <p>${post.body}</p>
+    `;
+  }
+  document.getElementById("main__blog-post").innerHTML = html;
+};
+
+fetch(urlPost)
+  .then((res) => res.json())
+  .then((data) => {
+    postsArray = data.slice(0, 5);
+    renderPosts();
+  });
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); // Stops page from reloading on 'click' event
+  const postTitle = titleInput.value;
+  const postBody = bodyInput.value;
+  const data = {
+    title: postTitle,
+    body: postBody,
+  };
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  fetch(urlPost, options)
+    .then((res) => res.json())
+    .then((post) => {
+      postsArray.unshift(post); // Moves new post to top of list
+      renderPosts(); // Render new post to page
+      form.reset(); // Reset the form
     });
 });
 
-const addText = () => {
-  document.querySelector(".bored__bot-header").innerHTML = `
-    <div class="bored__bot-header--repeat">
-      <h1 class="bored__bot-title">BoredBot</h1><br>
-      <p class="bored__bot-header-text">Get ready for some inspiring things to do!</p>
-    </div>
-  `;
-};
+fetch(urlWeather)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+  });
+
+// Practice with POST requests
+// fetch(urlTodos, {
+//   method: "POST",
+//   body: JSON.stringify({
+//     title: "Buy milk",
+//     completed: false,
+//   }),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// })
+//   .then((res) => res.json())
+//   .then((data) => {
+//     console.log(data);
+//   });

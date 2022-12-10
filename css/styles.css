@@ -6,119 +6,93 @@
   padding: 0;
 }
 
-body, html {
+body {
   font-family: "Poppins", sans-serif;
-  color: #373e4b;
-  /* uigradients.com */
-  background: #264650;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFFFF, #264650);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFFFF, #264650); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #F7F8F8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ACBB78, #F7F8F8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #ACBB78, #F7F8F8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-repeat: no-repeat;
-  height: 100vh;
-}
-
-header {
-  margin: 0;
-  padding: 0;
-}
-
-img {
-  max-width: 100%
 }
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
-
-.container-main {
-  padding: 3em 0 0 0;
-}
-
-.bored__bot-header {
-  padding: 3em 0;
-  background-color: rgb(143, 142, 142);
-  border-bottom: 2px solid #373e4b;
-  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.836);
-  margin: 0;
-}
-
-.bored__bot-header--fun {
-  /* uigradients.com */
-  background: #EF3B36;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #FFFFFF, #EF3B36);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #FFFFFF, #EF3B36); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
-
-.bored__bot-header--repeat {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-.bored__bot-title {
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
-}
-
-.bored__bot-header-text {
-  font-size: 1.1rem;
-  margin: -1rem 0 0 0;
-  padding: 0;
-
-}
-
-.bored__idea-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3em;
-}
-
-.bored__idea-input {
-  display: inline;
-}
-
-#bored__idea-text {
-  display: flex;
   justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  width: 700px;
-  height: 70px;
-  margin: 2.75rem 0 0 0;
-  border: 1px solid #373e4b;
+}
+
+.header__wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.blog__nav {
+  width: 100%;
+  background: #8e9eab;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 2em 1em;
+  border-bottom: 1px solid #969696b4;
+  box-shadow: 0 0 20px 10px #999;
+}
+
+.blog__api-input {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.336);
+  padding: .5em 0 1.5em 2em;
+  border-bottom: 1px solid rgb(190, 189, 189);
+  z-index: 1;
+}
+
+.blog__form {
+  display: grid;
+}
+
+.blog-input {
+  margin: 1.5em 0 0 1em;
+  padding: .75em .5em;
   border-radius: 10px;
-  /* uigradients.com */
-  background: #74ebd5;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  font-family: inherit;
+  font-size: .9rem;
+  width: 40%;
 }
 
+.blog-input--margin {
+  margin-left: 1.4em;
+}
 
-
-#bored__idea-btn {
-  margin-top: 2.5em;
-  padding: 0.75em 2.5em;
-  border-radius: 20px;
-  border: 1px solid #373e4b;
-  background-color: rgb(143, 142, 142);
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.466);
-  font-size: 1.3rem;
+.blog__post-btn {
+  width: 20%;
+  margin: 1.25em 0 0 4.5em;
+  padding: 1em 1em;
+  border-radius: 10px;
+  border: 0;
+  font-family: inherit;
+  font-size: .9rem;
   cursor: pointer;
-  color: #373e4b;
 }
 
-#bored__idea-btn:hover {
-  background-color: rgb(182, 182, 182);
-  color: #5d6574;
+.main__container {
+  margin-top: 0.25em;
+  max-width: 800px;
 }
 
+#main__blog-post {
+  width: 90%;
+  padding: 0 3em;
+}
 
+#main__blog-post > h3 {
+  margin: 1.75em 0 0.275em;
+  text-transform: uppercase;
+}
+
+#main__blog-post > p {
+  padding-bottom: 1.75em;
+  border-bottom: 1px dashed gray;
+}
+
+#main__blog-post > p:last-child {
+  border: none;
+}
