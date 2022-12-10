@@ -6,12 +6,12 @@
   padding: 0;
 }
 
-body, html {
+body {
   font-family: "Poppins", sans-serif;
   background: #F7F8F8;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #ACBB78, #F7F8F8);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #ACBB78, #F7F8F8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -23,6 +23,7 @@ body, html {
 .header__wrapper {
   position: sticky;
   top: 0;
+  z-index: 2;
 }
 
 .blog__nav {
@@ -31,8 +32,45 @@ body, html {
   background: -webkit-linear-gradient(to top, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: 2em 1em;
-  border-bottom: 1px dashed gray;
+  border-bottom: 1px solid #969696b4;
   box-shadow: 0 0 20px 10px #999;
+}
+
+.blog__api-input {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.336);
+  padding: .5em 0 1.5em 2em;
+  border-bottom: 1px solid rgb(190, 189, 189);
+  z-index: 1;
+}
+
+.blog__form {
+  display: grid;
+}
+
+.blog-input {
+  margin: 1.5em 0 0 1em;
+  padding: .75em .5em;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-size: .9rem;
+  width: 40%;
+}
+
+.blog-input--margin {
+  margin-left: 1.4em;
+}
+
+.blog__post-btn {
+  width: 20%;
+  margin: 1.25em 0 0 4.5em;
+  padding: 1em 1em;
+  border-radius: 10px;
+  border: 0;
+  font-family: inherit;
+  font-size: .9rem;
+  cursor: pointer;
 }
 
 .main__container {
