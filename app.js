@@ -3,8 +3,11 @@ const urlTodos = "https://apis.scrimba.com/jsonplaceholder/todos";
 const titleInput = document.getElementById("post-title");
 const bodyInput = document.getElementById("post-body");
 const form = document.getElementById("new-post");
-
 let postsArray = [];
+
+// Weather vars
+const urlWeather =
+  "https://apis.scrimba.com/openweathermap/data/2.5/weather?q=portland&units=imperial";
 
 const renderPosts = () => {
   let html = "";
@@ -49,6 +52,12 @@ form.addEventListener("submit", (e) => {
       form.reset(); // Reset the form
     });
 });
+
+fetch(urlWeather)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+  });
 
 // Practice with POST requests
 // fetch(urlTodos, {
