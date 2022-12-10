@@ -1,34 +1,33 @@
 const urlPost = "https://apis.scrimba.com/jsonplaceholder/posts";
 const urlTodos = "https://apis.scrimba.com/jsonplaceholder/todos";
+const titleInput = document.getElementById("post-title");
+const bodyInput = document.getElementById("post-body");
+const form = document.getElementById("new-post");
+
+let postsArray = [];
+
+const renderPosts = () => {
+  let html = "";
+  for (let post of postsArray) {
+    html += `
+      <h3>${post.title}</h3>
+      <p>${post.body}</p>
+    `;
+  }
+  document.getElementById("main__blog-post").innerHTML = html;
+};
 
 fetch(urlPost)
   .then((res) => res.json())
   .then((data) => {
-    const postsArr = data.slice(0, 5);
-
-    for (let post of postsArr) {
-      document.getElementById("main__blog-post").innerHTML += `
-    <h3>${post.title}</h3>
-    <p>${post.body}</p>
-  `;
-    }
+    postsArray = data.slice(0, 5);
+    renderPosts();
   });
 
-// document.getElementById("new-post").addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   const postTitle = document.getElementById("post-title").value;
-//   const postBody = document.getElementById("post-body").value;
-//   const data = {
-//     title: postTitle,
-//     body: postBody,
-//   };
-//   console.log(data);
-// });
-
-document.getElementById("new-post").addEventListener("submit", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault(); // Stops page from reloading on 'click' event
-  const postTitle = document.getElementById("post-title").value;
-  const postBody = document.getElementById("post-body").value;
+  const postTitle = titleInput.value;
+  const postBody = bodyInput.value;
   const data = {
     title: postTitle,
     body: postBody,
@@ -44,7 +43,11 @@ document.getElementById("new-post").addEventListener("submit", (e) => {
 
   fetch(urlPost, options)
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((post) => {
+      postsArray.unshift(post); // Moves new post to top of list
+      renderPosts(); // Render new post to page
+      form.reset(); // Reset the form
+    });
 });
 
 // Practice with POST requests
