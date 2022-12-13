@@ -1,16 +1,32 @@
-const url = "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/";
 let deckId = "";
 
-const apiCall = () => {
-  fetch(url)
+const apiShuffle = () => {
+  const urlShuffle =
+    "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/";
+  fetch(urlShuffle)
     .then((res) => res.json())
     .then((data) => {
       deckId = data.deck_id;
+      console.log(data);
       console.log(deckId);
     });
 };
 
-document.getElementById("deck-btn").addEventListener("click", apiCall);
+const apiDeck = () => {
+  const urlDeck = `https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`;
+  fetch(urlDeck)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("card-container").innerHTML = `
+        <img class="card-img" src="${data.cards[0].image}">
+        <img class="card-img" src="${data.cards[1].image}">
+      `;
+    });
+};
+
+document.getElementById("shuffle-btn").addEventListener("click", apiShuffle);
+document.getElementById("deck-btn").addEventListener("click", apiDeck);
 
 /* RESOURCES */
 // Practice with arrays and .filer() and .map() methods

@@ -15,6 +15,10 @@ body {
   height: 100vh;
 }
 
+.img {
+  max-width: 100%;
+}
+
 .header {
   color: whitesmoke;
   background: #3E5151;  /* fallback for old browsers */
@@ -25,7 +29,7 @@ body {
   border-bottom: 1px solid gray;
 }
 
-#deck-btn {
+.card-btn {
   margin: 1em 0 0 .5em;
   padding: 1em 1.5em;
   text-transform: uppercase;
@@ -40,10 +44,27 @@ body {
   cursor: pointer;
 }
 
-#deck-btn:hover {
+.card-btn + .card-btn {
+  margin-left: 1em;
+}
+
+.card-btn:hover {
   background: #544a7d;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #DECBA4, #616d72, #13323f);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #DECBA4, #616d72, #13323f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-repeat: no-repeat;
   color: rgb(216, 216, 216)
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img {
+  margin-top: 2em;
+  border: none;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.411)
 }
