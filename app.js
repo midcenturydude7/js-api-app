@@ -1,4 +1,7 @@
 let deckId = "";
+const cardsContainer = document.getElementById("cards-container");
+const shuffleBtn = document.getElementById("shuffle-btn");
+const deckBtn = document.getElementById("deck-btn");
 
 const apiShuffle = () => {
   const urlShuffle =
@@ -18,15 +21,17 @@ const apiDeck = () => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      document.getElementById("card-container").innerHTML = `
-        <img class="card-img" src="${data.cards[0].image}">
-        <img class="card-img" src="${data.cards[1].image}">
+      cardsContainer.children[1].innerHTML = `
+        <img class="cards-img" src="${data.cards[0].image}">
+      `;
+      cardsContainer.children[3].innerHTML = `
+        <img class="cards-img" src="${data.cards[1].image}">
       `;
     });
 };
 
-document.getElementById("shuffle-btn").addEventListener("click", apiShuffle);
-document.getElementById("deck-btn").addEventListener("click", apiDeck);
+shuffleBtn.addEventListener("click", apiShuffle);
+deckBtn.addEventListener("click", apiDeck);
 
 /* RESOURCES */
 // Practice with arrays and .filer() and .map() methods

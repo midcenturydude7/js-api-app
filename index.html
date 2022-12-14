@@ -13,18 +13,30 @@
   <title>API Learning with Async JS - Game of War App</title>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <h1>Game of War</h1>
-      <div class="deck-btn-container">
-        <button id="shuffle-btn" class="card-btn">new deck</button>
-        <button id="deck-btn" class="card-btn">draw cards</button>
+  <wrapper class="wrapper-container">
+    <header class="header">
+      <div class="container">
+        <h1 class="header-title">Game of War!</h1>
       </div>
-    </div>
-  </header>
-  <main>
-    <div id="card-container" class="card-container" ></div>
-  </main>
+    </header>
+    <main>
+      <div id="cards-container" class="container cards-container">
+        <h1 class="cards-score-title" id="cards-score">Computer: 0</h1>
+        <div id="cards-placeholder" class="cards-placeholder"></div>
+        <h1 class="cards-score-title border-top" id="cards-score">Me: 0</h1>
+        <div id="cards-placeholder" class="cards-placeholder"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="deck-btn-container">
+          <button id="shuffle-btn" class="cards-btn">shuffle deck</button>
+          <button id="deck-btn" class="cards-btn">draw cards</button>
+        </div>
+        <h3 class="header-cards-counter">Cards Remaining: 52</h3>
+      </div>
+    </footer>
+  </wrapper>
   <script type="module" src="app.js"></script>
 </body>
 </html>
