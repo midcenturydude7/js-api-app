@@ -14,53 +14,46 @@ const cardsScoreComputerEl = document.getElementById("cards-score-computer");
 const cardsScoreUserEl = document.getElementById("cards-score-user");
 const headerTitle = document.getElementById("header-title");
 
-const apiNewDeck = () => {
+async function apiNewDeck() {
   const urlNewDeck =
     "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/";
-  fetch(urlNewDeck)
-    .then((res) => res.json())
-    .then((data) => {
-      deckId = data.deck_id;
-      console.log(data);
-      console.log(deckId);
-      const cardsRemaining = data.remaining;
-      cardCounter.textContent = cardsRemaining;
-    });
-};
+  const response = await fetch(urlNewDeck);
+  const data = await response.json();
+  deckId = data.deck_id;
+  const cardsRemaining = data.remaining;
+  cardCounter.textContent = cardsRemaining;
+}
 
-const apiDraw = () => {
+async function apiDraw() {
   const urlDeck = `https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`;
-  fetch(urlDeck)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
+  const response = await fetch(urlDeck);
+  const data = await response.json();
 
-      cardsContainer.children[1].innerHTML = `
+  cardsContainer.children[1].innerHTML = `
         <img class="cards-img" src="${data.cards[0].image}">
       `;
 
-      cardsContainer.children[3].innerHTML = `
+  cardsContainer.children[3].innerHTML = `
         <img class="cards-img" src="${data.cards[1].image}">
       `;
 
-      const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
-      headerSubtitleResult.textContent = winnerText;
+  const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+  headerSubtitleResult.textContent = winnerText;
 
-      const cardsRemaining = data.remaining;
-      cardCounter.textContent = cardsRemaining;
+  const cardsRemaining = data.remaining;
+  cardCounter.textContent = cardsRemaining;
 
-      if (data.remaining === 0) {
-        drawBtn.disabled = true;
-        headerSubtitleResult.textContent = "";
-        headerSubTitleLeft.textContent = "";
-        if (computerScore > myScore) {
-          return (headerTitle.textContent = "The Computer Won!");
-        } else if (myScore > computerScore) {
-          return (headerTitle.textContent = "YOU WON!!!");
-        } else headerTitle.textContent = "It's a tie!";
-      }
-    });
-};
+  if (data.remaining === 0) {
+    drawBtn.disabled = true;
+    headerSubtitleResult.textContent = "";
+    headerSubTitleLeft.textContent = "";
+    if (computerScore > myScore) {
+      return (headerTitle.textContent = "The Computer Won!");
+    } else if (myScore > computerScore) {
+      return (headerTitle.textContent = "YOU WON!!!");
+    } else headerTitle.textContent = "It's a tie!";
+  }
+}
 
 newDeckBtn.addEventListener("click", apiNewDeck);
 drawBtn.addEventListener("click", apiDraw);
