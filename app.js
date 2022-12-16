@@ -1,76 +1,145 @@
-const urlPost = "https://apis.scrimba.com/jsonplaceholder/posts";
-const urlTodos = "https://apis.scrimba.com/jsonplaceholder/todos";
-const titleInput = document.getElementById("post-title");
-const bodyInput = document.getElementById("post-body");
-const form = document.getElementById("new-post");
-let postsArray = [];
+// Mutable Variables | Global
+let deckId = "";
+let computerScore = 0;
+let myScore = 0;
 
-// Weather vars
-const urlWeather =
-  "https://apis.scrimba.com/openweathermap/data/2.5/weather?q=portland&units=imperial";
+// DOM Variables
+const cardsContainer = document.getElementById("cards-container");
+const newDeckBtn = document.getElementById("new-deck-btn");
+const drawBtn = document.getElementById("draw-btn");
+const headerSubTitleLeft = document.getElementById("header-subtitle-left");
+const headerSubtitleResult = document.getElementById("header-subtitle-result");
+const cardCounter = document.getElementById("card-counter");
+const cardsScoreComputerEl = document.getElementById("cards-score-computer");
+const cardsScoreUserEl = document.getElementById("cards-score-user");
+const headerTitle = document.getElementById("header-title");
 
-const renderPosts = () => {
-  let html = "";
-  for (let post of postsArray) {
-    html += `
-      <h3>${post.title}</h3>
-      <p>${post.body}</p>
-    `;
-  }
-  document.getElementById("main__blog-post").innerHTML = html;
+const apiNewDeck = () => {
+  const urlNewDeck =
+    "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/";
+  fetch(urlNewDeck)
+    .then((res) => res.json())
+    .then((data) => {
+      deckId = data.deck_id;
+      console.log(data);
+      console.log(deckId);
+      const cardsRemaining = data.remaining;
+      cardCounter.textContent = cardsRemaining;
+    });
 };
 
-fetch(urlPost)
-  .then((res) => res.json())
-  .then((data) => {
-    postsArray = data.slice(0, 5);
-    renderPosts();
-  });
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // Stops page from reloading on 'click' event
-  const postTitle = titleInput.value;
-  const postBody = bodyInput.value;
-  const data = {
-    title: postTitle,
-    body: postBody,
-  };
-
-  const options = {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  fetch(urlPost, options)
+const apiDraw = () => {
+  const urlDeck = `https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`;
+  fetch(urlDeck)
     .then((res) => res.json())
-    .then((post) => {
-      postsArray.unshift(post); // Moves new post to top of list
-      renderPosts(); // Render new post to page
-      form.reset(); // Reset the form
+    .then((data) => {
+      console.log(data);
+
+      cardsContainer.children[1].innerHTML = `
+        <img class="cards-img" src="${data.cards[0].image}">
+      `;
+
+      cardsContainer.children[3].innerHTML = `
+        <img class="cards-img" src="${data.cards[1].image}">
+      `;
+
+      const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+      headerSubtitleResult.textContent = winnerText;
+
+      const cardsRemaining = data.remaining;
+      cardCounter.textContent = cardsRemaining;
+
+      if (data.remaining === 0) {
+        drawBtn.disabled = true;
+        headerSubtitleResult.textContent = "";
+        headerSubTitleLeft.textContent = "";
+        if (computerScore > myScore) {
+          return (headerTitle.textContent = "The Computer Won!");
+        } else if (myScore > computerScore) {
+          return (headerTitle.textContent = "YOU WON!!!");
+        } else headerTitle.textContent = "It's a tie!";
+      }
     });
-});
+};
 
-fetch(urlWeather)
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
-  });
+newDeckBtn.addEventListener("click", apiNewDeck);
+drawBtn.addEventListener("click", apiDraw);
 
-// Practice with POST requests
-// fetch(urlTodos, {
-//   method: "POST",
-//   body: JSON.stringify({
-//     title: "Buy milk",
-//     completed: false,
-//   }),
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// })
-//   .then((res) => res.json())
-//   .then((data) => {
-//     console.log(data);
-//   });
+const determineCardWinner = (card1, card2) => {
+  const valueOptions = [
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "JACK",
+    "QUEEN",
+    "KING",
+    "ACE",
+  ];
+
+  valueOptions.indexOf(card1.value);
+  valueOptions.indexOf(card2.value);
+
+  if (card1.value > card2.value) {
+    computerScore++;
+    cardsScoreComputerEl.textContent = `Computer score: ${computerScore}`;
+    return "Pute won!";
+  } else if (card2.value > card1.value) {
+    myScore++;
+    cardsScoreUserEl.textContent = `My score: ${myScore}`;
+    return "You won!";
+  } else {
+    return "War!";
+  }
+};
+
+/* RESOURCES */
+// Practice with arrays and .filer() and .map() methods
+// const voters = [
+//   { name: "Joe", email: "joe@joe.com", voted: true },
+//   { name: "Jane", email: "jane@jane.com", voted: true },
+//   { name: "Bo", email: "bo@bo.com", voted: false },
+//   { name: "Bane", email: "bane@bane.com", voted: false },
+// ];
+
+// const voterArr = voters
+//   .filter((voter) => voter.voted)
+//   .map((voter) => voter.email);
+// console.log(voterArr);
+
+// Practice with callback functions
+// const textCallback = () => {
+//   console.log("I finally ran!");
+// };
+
+// setTimeout(textCallback, 2000);
+
+// Practice with callbacks and filter() method
+// const people = [
+//   { name: "Jack", hasPet: true },
+//   { name: "Jill", hasPet: false },
+//   { name: "Alice", hasPet: true },
+//   { name: "Bob", hasPet: false },
+// ];
+
+// function filterArray(array, callback) {
+//   const resultingArray = [];
+//   // Write your filtering logic here
+//   for (let item of array) {
+//     const shouldBeIncluded = callback(item);
+//     if (shouldBeIncluded) {
+//       resultingArray.push(item);
+//     }
+//   }
+//   return resultingArray;
+// }
+
+// const peopleWithPets = filterArray(people, (person) => {
+//   return person.hasPet;
+// });
+// console.log(peopleWithPets);
