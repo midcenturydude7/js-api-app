@@ -48,19 +48,17 @@ img {
 .header-result {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 70%;
 }
 
 .header-subtitle-left {
-  margin-right: 2em;
-  align-self: flex-start;
+  margin-right: 1.25em;
 }
 
 .header-subtitle-right {
   color: #0c6a7a;;
-  align-self: flex-end;
 }
 
 .header-cards-counter {
