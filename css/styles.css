@@ -51,6 +51,7 @@ img {
   justify-content: flex-end;
   align-items: center;
   width: 70%;
+  max-width: 300px;
 }
 
 .header-subtitle-left {
