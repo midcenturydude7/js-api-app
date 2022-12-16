@@ -1,37 +1,102 @@
+// Mutable Variables | Global
 let deckId = "";
-const cardsContainer = document.getElementById("cards-container");
-const shuffleBtn = document.getElementById("shuffle-btn");
-const deckBtn = document.getElementById("deck-btn");
+let computerScore = 0;
+let myScore = 0;
 
-const apiShuffle = () => {
-  const urlShuffle =
+// DOM Variables
+const cardsContainer = document.getElementById("cards-container");
+const newDeckBtn = document.getElementById("new-deck-btn");
+const drawBtn = document.getElementById("draw-btn");
+const headerSubTitleLeft = document.getElementById("header-subtitle-left");
+const headerSubtitleResult = document.getElementById("header-subtitle-result");
+const cardCounter = document.getElementById("card-counter");
+const cardsScoreComputerEl = document.getElementById("cards-score-computer");
+const cardsScoreUserEl = document.getElementById("cards-score-user");
+const headerTitle = document.getElementById("header-title");
+
+const apiNewDeck = () => {
+  const urlNewDeck =
     "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/";
-  fetch(urlShuffle)
+  fetch(urlNewDeck)
     .then((res) => res.json())
     .then((data) => {
       deckId = data.deck_id;
       console.log(data);
       console.log(deckId);
+      const cardsRemaining = data.remaining;
+      cardCounter.textContent = cardsRemaining;
     });
 };
 
-const apiDeck = () => {
+const apiDraw = () => {
   const urlDeck = `https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`;
   fetch(urlDeck)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+
       cardsContainer.children[1].innerHTML = `
         <img class="cards-img" src="${data.cards[0].image}">
       `;
+
       cardsContainer.children[3].innerHTML = `
         <img class="cards-img" src="${data.cards[1].image}">
       `;
+
+      const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+      headerSubtitleResult.textContent = winnerText;
+
+      const cardsRemaining = data.remaining;
+      cardCounter.textContent = cardsRemaining;
+
+      if (data.remaining === 0) {
+        drawBtn.disabled = true;
+        headerSubtitleResult.textContent = "";
+        headerSubTitleLeft.textContent = "";
+        if (computerScore > myScore) {
+          return (headerTitle.textContent = "The Computer Won!");
+        } else if (myScore > computerScore) {
+          return (headerTitle.textContent = "YOU WON!!!");
+        } else headerTitle.textContent = "It's a tie!";
+      }
     });
 };
 
-shuffleBtn.addEventListener("click", apiShuffle);
-deckBtn.addEventListener("click", apiDeck);
+newDeckBtn.addEventListener("click", apiNewDeck);
+drawBtn.addEventListener("click", apiDraw);
+
+const determineCardWinner = (card1, card2) => {
+  const valueOptions = [
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "JACK",
+    "QUEEN",
+    "KING",
+    "ACE",
+  ];
+
+  valueOptions.indexOf(card1.value);
+  valueOptions.indexOf(card2.value);
+
+  if (card1.value > card2.value) {
+    computerScore++;
+    cardsScoreComputerEl.textContent = `Computer score: ${computerScore}`;
+    return "Pute won!";
+  } else if (card2.value > card1.value) {
+    myScore++;
+    cardsScoreUserEl.textContent = `My score: ${myScore}`;
+    return "You won!";
+  } else {
+    return "War!";
+  }
+};
 
 /* RESOURCES */
 // Practice with arrays and .filer() and .map() methods
