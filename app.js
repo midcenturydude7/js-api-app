@@ -2,7 +2,9 @@
 const footerAuthorInfo = document.getElementById("footer__author-info");
 const headerCoinContainer = document.getElementById("header__coin-container");
 const theTime = document.getElementById("the-time");
-
+const headerWeatherContainer = document.querySelector(
+  ".header__weather-container"
+);
 // Error handling variable
 const errorMsg = "is not available at this time";
 
@@ -28,12 +30,9 @@ unsplashApi();
 
 function coinApi() {
   // Coin variables
-  const urlBitcoin =
-    "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=true";
-  const urlEthereum =
-    "https://api.coingecko.com/api/v3/coins/ethereum?tickers=true";
-  const urlCardano =
-    "https://api.coingecko.com/api/v3/coins/cardano?tickers=true";
+  const urlBitcoin = "https://api.coingecko.com/api/v3/coins/bitcoin";
+  const urlEthereum = "https://api.coingecko.com/api/v3/coins/ethereum";
+  const urlCardano = "https://api.coingecko.com/api/v3/coins/cardano";
 
   // API calls
   fetch(urlBitcoin)
@@ -49,7 +48,7 @@ function coinApi() {
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.tickers[0].last}
+        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
@@ -88,7 +87,7 @@ function coinApi() {
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.tickers[0].last}
+        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
@@ -127,7 +126,7 @@ function coinApi() {
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.tickers[0].last}
+        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
@@ -162,4 +161,41 @@ const getTime = () => {
   });
   theTime.textContent = currentTime;
 };
-getTime();
+setInterval(getTime, 1000);
+
+// Get weather data via Open Weather Map API
+const getWeather = (lat, lon) => {
+  const apiKey = "b4c7965ee7139848bbc6531c9c464158";
+  const urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+  fetch(urlWeather)
+    .then((res) => {
+      if (!res.ok) {
+        throw Error("Weather is not available");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      const temp = Math.round(data.main.temp);
+      headerWeatherContainer.innerHTML = `
+        <div class="header__weather-info">  
+          <img src="${iconUrl}"/>
+          <p class="weather-temp">${temp}°</p>
+          <p class="weather-desc">${data.weather[0].description}</p>
+        </div>
+        <div class="weather-location">
+          <p class="location-icon"><i class="fa-solid fa-location-dot"></i><p>
+          <p>${data.name}</p>
+        </div>
+      `;
+    })
+    .catch((err) => console.log(err));
+};
+
+const testGeolocation = () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    getWeather(position.coords.latitude, position.coords.longitude);
+  });
+};
+console.log(testGeolocation());
