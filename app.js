@@ -1,3 +1,5 @@
+import { apiKey } from "./apiKey.js";
+
 // DOM variables
 const footerAuthorInfo = document.getElementById("footer__author-info");
 const headerCoinContainer = document.getElementById("header__coin-container");
@@ -165,7 +167,6 @@ setInterval(getTime, 1000);
 
 // Get weather data via Open Weather Map API
 const getWeather = (lat, lon) => {
-  const apiKey = "b4c7965ee7139848bbc6531c9c464158";
   const urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   fetch(urlWeather)
     .then((res) => {
