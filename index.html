@@ -10,35 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
-  <title>API Learning with Async JS - Game of War App</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>API Learning with Async JS - Momentum Dashboard App</title>
 </head>
 <body>
-  <wrapper class="wrapper-container">
-    <header class="header">
-      <div class="container">
-        <h1 class="header-title" id="header-title">Game of War!</h1>
-        <div class="header-result">
-          <h2 class="header-subtitle-left" id="header-subtitle-left">Result: </h2>
-          <h2 class="header-subtitle-right" id="header-subtitle-result"></h2>
+  <wrapper class="wrapper-container" id="wrapper-container">
+    <header class="header-container">
+      <div class="header__section-container">
+        <div class="header__coin-container" id="header__coin-container">
+          <h2>Cryptocurrencies</h2>
         </div>
+      </div>
+      <div class="header__weather-container">
+        <p>Weather</p>
       </div>
     </header>
-    <main>
-      <div id="cards-container" class="container cards-container">
-        <h1 class="cards-score-title" id="cards-score-computer">Computer score: 0</h1>
-        <div id="cards-placeholder" class="cards-placeholder"></div>
-        <h1 class="cards-score-title border-top" id="cards-score-user">My score: 0</h1>
-        <div id="cards-placeholder" class="cards-placeholder"></div>
+    <main class="main-container">
+      <div>
+        <h1 class="main__container-text" id="the-time"></h1>
       </div>
     </main>
-    <footer class="footer">
-      <div class="container">
-        <div class="deck-btn-container">
-          <button id="new-deck-btn" class="cards-btn">new deck</button>
-          <button id="draw-btn" class="cards-btn">draw cards</button>
-        </div>
-        <h3 class="header-cards-counter">Cards Remaining: <span id="card-counter">52</h3>
-      </div>
+    <footer class="footer-container">
+      <p id="footer__author-info" class="footer__author-info"></p>
     </footer>
   </wrapper>
   <script type="module" src="app.js"></script>
