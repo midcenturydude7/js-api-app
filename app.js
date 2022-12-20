@@ -20,7 +20,7 @@ function unsplashApi() {
     .then((data) => {
       console.log(data);
       document.body.style.backgroundImage = `url(${data.urls.full})`;
-      footerAuthorInfo.textContent = `By: ${data.user.name}`;
+      footerAuthorInfo.textContent = `Photo credit: ${data.user.name}`;
     })
     .catch((err) => {
       console.log(err);
