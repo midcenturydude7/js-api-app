@@ -13,6 +13,8 @@ const headerWeatherContainer = document.querySelector(
 const urlBitcoin = "https://api.coingecko.com/api/v3/coins/bitcoin";
 const urlEthereum = "https://api.coingecko.com/api/v3/coins/ethereum";
 const urlCardano = "https://api.coingecko.com/api/v3/coins/cardano";
+const urlPolygon = "https://api.coingecko.com/api/v3/coins/matic-network";
+const urlSolana = "https://api.coingecko.com/api/v3/coins/solana";
 
 // Error handling variable
 const errorMsg = "is not available at this time";
@@ -40,7 +42,7 @@ unsplashApi();
 // Cryptocurrency API calls/data request
 const cryptoApi = () => {
   // Url array
-  const urls = [urlBitcoin, urlEthereum, urlCardano];
+  const urls = [urlBitcoin, urlEthereum, urlCardano, urlPolygon, urlSolana];
 
   for (const url of urls) {
     fetch(url)
@@ -55,8 +57,8 @@ const cryptoApi = () => {
         console.log(data);
         const dailyCurrent = data.market_data.current_price.usd;
         const percentageNum =
-          data.market_data.price_change_percentage_1h_in_currency.usd;
-        const percentageChange = percentageNum.toFixed(5).slice(0, -1);
+          data.market_data.price_change_percentage_24h_in_currency.usd;
+        const percentageChange = percentageNum.toFixed(3).slice(0, -1);
         headerCoinContainer.innerHTML += `
         <div class="header__coin-spacing">
           <img src=${data.image.small} class="header-img"/>
@@ -95,7 +97,7 @@ const cryptoApi = () => {
       .catch((err) => {
         console.log(err);
         headerCoinContainer.innerHTML += `
-          <p>Cardano ${errorMsg}</p>
+          <p>${err.symbol} ${errorMsg}</p>
         `;
       });
   }

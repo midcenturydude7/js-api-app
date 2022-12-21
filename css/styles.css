@@ -72,7 +72,7 @@ body {
   padding: 0 0.75em
 }
 
-.header__coin-spacing:nth-child(3) {
+.header__coin-spacing:nth-child(odd) {
   background: #ECE9E6;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #ece9e6ef, #ffffff10);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #ece9e60e, #ffffff62); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
