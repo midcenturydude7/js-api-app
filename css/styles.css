@@ -44,12 +44,14 @@ body {
   justify-content: space-between;
 }
 
+/* Header: Cryptocurrencies and Weather Trackers */
 .header-container {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5em
 }
 
+/* Cryptocurrencies Tracker */ 
 .header__coin-container {
   display: flex;
   flex-direction: column;
@@ -70,13 +72,11 @@ body {
   padding: 0 0.75em
 }
 
-/* .header__coin-spacing + .header__coin-spacing {
-  border-top: 1px dashed #fff;
-  padding-top: .75em;
-} */
-
 .header__coin-spacing:nth-child(3) {
-  background-color: rgba(255, 255, 255, 0.171);
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #ece9e6ef, #ffffff10);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #ece9e60e, #ffffff62); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   border-top: 1px dashed #fff;
   border-bottom: 1px dashed #fff;
   padding: .75em;
@@ -145,6 +145,7 @@ body {
   margin-right: 0.275em;
 }
 
+/* Weather Tracker */
 .header__weather-container {
   display: flex;
   flex-direction: column;
@@ -188,12 +189,14 @@ body {
   justify-content: center;
 }
 
+/* Main Container - Time of Day */
 .main__container-text {
   font-size: 3.75rem;
   font-weight: 800;
 
 }
 
+/* Footer Container: Photo Credit */
 .footer-container {
   display: flex;
   justify-content: flex-start;

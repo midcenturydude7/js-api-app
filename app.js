@@ -8,10 +8,16 @@ const theTime = document.getElementById("the-time");
 const headerWeatherContainer = document.querySelector(
   ".header__weather-container"
 );
+
+// API urls
+const urlBitcoin = "https://api.coingecko.com/api/v3/coins/bitcoin";
+const urlEthereum = "https://api.coingecko.com/api/v3/coins/ethereum";
+const urlCardano = "https://api.coingecko.com/api/v3/coins/cardano";
+
 // Error handling variable
 const errorMsg = "is not available at this time";
 
-// API call
+// Background image API call
 function unsplashApi() {
   const urlUnsplash =
     "https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature";
@@ -31,188 +37,70 @@ function unsplashApi() {
 }
 unsplashApi();
 
-function coinApi() {
-  // Coin variables
-  const urlBitcoin = "https://api.coingecko.com/api/v3/coins/bitcoin";
-  const urlEthereum = "https://api.coingecko.com/api/v3/coins/ethereum";
-  const urlCardano = "https://api.coingecko.com/api/v3/coins/cardano";
+// Cryptocurrency API calls/data request
+const cryptoApi = () => {
+  // Url array
+  const urls = [urlBitcoin, urlEthereum, urlCardano];
 
-  // API calls
-  fetch(urlBitcoin)
-    .then((res) => {
-      if (!res.ok) {
-        throw Error("Something went wrong");
-      }
-      console.log(res.status);
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      const dailyCurrent = data.market_data.current_price.usd;
-      const dailyLow = data.market_data.low_24h.usd;
-      const dailyDiff = dailyCurrent - dailyLow;
-      const dailyAvg = (dailyCurrent + dailyLow) / 2;
-      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
-      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
-      headerCoinContainer.innerHTML += `
-      <div class="header__coin-spacing">
-        <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">
-          <div class="header__coin-ticker">
-            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
-            <p class="ticker-align">${
-              dailyAvgNum < 0
-                ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
-                : // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-            }${dailyAvgNum}%
-            </p>
-          </div>
-          <div class="header__coin-data-container">
-            <div class=".header__coin-price-left">
-              <p class="header__coin-data padding">
-                <span class="header-icon">
-                  <i class="fa-solid fa-chart-line"></i>
-                </span>24hr High
+  for (const url of urls) {
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Something went wrong");
+        }
+        console.log(res.status);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const dailyCurrent = data.market_data.current_price.usd;
+        const percentageNum =
+          data.market_data.price_change_percentage_1h_in_currency.usd;
+        const percentageChange = percentageNum.toFixed(5).slice(0, -1);
+        headerCoinContainer.innerHTML += `
+        <div class="header__coin-spacing">
+          <img src=${data.image.small} class="header-img"/>
+          <div class="header__coin-text">
+            <div class="header__coin-ticker">
+              <p>${data.symbol}: $${dailyCurrent}</p>
+              <p class="ticker-align">${
+                percentageChange < 0
+                  ? // eslint-disable-next-line quotes
+                    `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+                  : // eslint-disable-next-line quotes
+                    `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
+              }${percentageChange}%
               </p>
-              <p class="header__coin-data spacer">$${
-                data.market_data.high_24h.usd
-              }</p>
             </div>
-            <div class="header__coin-price-right">
-              <p class="header__coin-data padding">24hr Low</p>
-              <p class="header__coin-data">$${data.market_data.low_24h.usd}<p>
+            <div class="header__coin-data-container">
+              <div class=".header__coin-price-left">
+                <p class="header__coin-data padding">
+                  <span class="header-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </span>24hr High
+                </p>
+                <p class="header__coin-data spacer">$${
+                  data.market_data.high_24h.usd
+                }</p>
+              </div>
+              <div class="header__coin-price-right">
+                <p class="header__coin-data padding">24hr Low</p>
+                <p class="header__coin-data">$${data.market_data.low_24h.usd}<p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       `;
-    })
-    .catch((err) => {
-      console.log(err);
-      headerCoinContainer.innerHTML += `
-        <p>Bitcoin ${errorMsg}</p>
-      `;
-    });
-
-  fetch(urlEthereum)
-    .then((res) => {
-      if (!res.ok) {
-        throw Error("Something went wrong");
-      }
-      console.log(res.status);
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      const dailyCurrent = data.market_data.current_price.usd;
-      const dailyLow = data.market_data.low_24h.usd;
-      const dailyDiff = dailyCurrent - dailyLow;
-      const dailyAvg = (dailyCurrent + dailyLow) / 2;
-      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
-      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
-      headerCoinContainer.innerHTML += `
-      <div class="header__coin-spacing">
-        <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">
-          <div class="header__coin-ticker">
-            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
-            <p class="ticker-align">${
-              dailyAvgNum < 0
-                ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
-                : // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-            }${dailyAvgNum}%
-            </p>
-          </div>
-          <div class="header__coin-data-container">
-            <div class=".header__coin-price-left">
-              <p class="header__coin-data padding">
-                <span class="header-icon">
-                  <i class="fa-solid fa-chart-line"></i>
-                </span>24hr High
-              </p>
-              <p class="header__coin-data spacer">$${
-                data.market_data.high_24h.usd
-              }</p>
-            </div>
-            <div class="header__coin-price-right">
-              <p class="header__coin-data padding">24hr Low</p>
-              <p class="header__coin-data">$${data.market_data.low_24h.usd}<p>
-            </div>
-          </div>
-        </div>
-      </div>
-      `;
-    })
-    .catch((err) => {
-      console.log(err);
-      headerCoinContainer.innerHTML += `
-        <p>Ethereum ${errorMsg}</p>
-      `;
-    });
-
-  fetch(urlCardano)
-    .then((res) => {
-      if (!res.ok) {
-        throw Error("Something went wrong");
-      }
-      console.log(res.status);
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-      const dailyCurrent = data.market_data.current_price.usd;
-      const dailyLow = data.market_data.low_24h.usd;
-      const dailyDiff = dailyCurrent - dailyLow;
-      const dailyAvg = (dailyCurrent + dailyLow) / 2;
-      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
-      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
-      headerCoinContainer.innerHTML += `
-      <div class="header__coin-spacing">
-        <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">
-          <div class="header__coin-ticker">
-            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
-            <p class="ticker-align">${
-              dailyAvgNum < 0
-                ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
-                : // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-            }${dailyAvgNum}%
-            </p>
-          </div>
-          <div class="header__coin-data-container">
-            <div class=".header__coin-price-left">
-              <p class="header__coin-data padding">
-                <span class="header-icon">
-                  <i class="fa-solid fa-chart-line"></i>
-                </span>24hr High
-              </p>
-              <p class="header__coin-data spacer">$${
-                data.market_data.high_24h.usd
-              }</p>
-            </div>
-            <div class="header__coin-price-right">
-              <p class="header__coin-data padding">24hr Low</p>
-              <p class="header__coin-data">$${data.market_data.low_24h.usd}<p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-    })
-    .catch((err) => {
-      console.log(err);
-      headerCoinContainer.innerHTML += `
-        <p>Cardano ${errorMsg}</p>
-      `;
-    });
-}
-coinApi();
+      })
+      .catch((err) => {
+        console.log(err);
+        headerCoinContainer.innerHTML += `
+          <p>Cardano ${errorMsg}</p>
+        `;
+      });
+  }
+};
+cryptoApi();
 
 // Current time to display on page
 const getTime = () => {
@@ -223,7 +111,7 @@ const getTime = () => {
 };
 setInterval(getTime, 1000);
 
-// Get weather data via Open Weather Map API
+// Open Weather Map API call
 const getWeather = (lat, lon) => {
   const urlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   fetch(urlWeather)
