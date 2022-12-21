@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { apiKey } from "./apiKey.js";
 
 // DOM variables
@@ -57,8 +58,16 @@ function coinApi() {
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
         <div class="header__coin-text">
-          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
-            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          <div class="header__coin-ticker">
+            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
+            <p class="ticker-align">${
+              dailyAvgNum >= 0
+                ? // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+            }${dailyAvgNum}%
+            </p>
           </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
@@ -67,7 +76,9 @@ function coinApi() {
                   <i class="fa-solid fa-chart-line"></i>
                 </span>24hr High
               </p>
-              <p class="header__coin-data spacer">$${data.market_data.high_24h.usd}</p>
+              <p class="header__coin-data spacer">$${
+                data.market_data.high_24h.usd
+              }</p>
             </div>
             <div class="header__coin-price-right">
               <p class="header__coin-data padding">24hr Low</p>
@@ -105,8 +116,16 @@ function coinApi() {
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
         <div class="header__coin-text">
-          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
-            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          <div class="header__coin-ticker">
+            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
+            <p class="ticker-align">${
+              dailyAvgNum >= 0
+                ? // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+            }${dailyAvgNum}%
+            </p>
           </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
@@ -115,7 +134,9 @@ function coinApi() {
                   <i class="fa-solid fa-chart-line"></i>
                 </span>24hr High
               </p>
-              <p class="header__coin-data spacer">$${data.market_data.high_24h.usd}</p>
+              <p class="header__coin-data spacer">$${
+                data.market_data.high_24h.usd
+              }</p>
             </div>
             <div class="header__coin-price-right">
               <p class="header__coin-data padding">24hr Low</p>
@@ -153,8 +174,16 @@ function coinApi() {
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
         <div class="header__coin-text">
-          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
-            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          <div class="header__coin-ticker">
+            <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
+            <p class="ticker-align">${
+              dailyAvgNum >= 0
+                ? // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+            }${dailyAvgNum}%
+            </p>
           </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
@@ -163,7 +192,9 @@ function coinApi() {
                   <i class="fa-solid fa-chart-line"></i>
                 </span>24hr High
               </p>
-              <p class="header__coin-data spacer">$${data.market_data.high_24h.usd}</p>
+              <p class="header__coin-data spacer">$${
+                data.market_data.high_24h.usd
+              }</p>
             </div>
             <div class="header__coin-price-right">
               <p class="header__coin-data padding">24hr Low</p>
