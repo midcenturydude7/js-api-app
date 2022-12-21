@@ -61,11 +61,11 @@ function coinApi() {
           <div class="header__coin-ticker">
             <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
             <p class="ticker-align">${
-              dailyAvgNum >= 0
+              dailyAvgNum < 0
                 ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-                : // eslint-disable-next-line quotes
                   `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
             }${dailyAvgNum}%
             </p>
           </div>
@@ -119,11 +119,11 @@ function coinApi() {
           <div class="header__coin-ticker">
             <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
             <p class="ticker-align">${
-              dailyAvgNum >= 0
+              dailyAvgNum < 0
                 ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-                : // eslint-disable-next-line quotes
                   `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
             }${dailyAvgNum}%
             </p>
           </div>
@@ -177,11 +177,11 @@ function coinApi() {
           <div class="header__coin-ticker">
             <p>${data.symbol}: $${data.market_data.current_price.usd}</p>
             <p class="ticker-align">${
-              dailyAvgNum >= 0
+              dailyAvgNum < 0
                 ? // eslint-disable-next-line quotes
-                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
-                : // eslint-disable-next-line quotes
                   `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
+                : // eslint-disable-next-line quotes
+                  `<span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span>`
             }${dailyAvgNum}%
             </p>
           </div>

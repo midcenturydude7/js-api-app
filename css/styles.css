@@ -99,6 +99,7 @@ body {
 }
 
 .percentage-spacer-red {
+  margin: 0 0.2em 0 0.575em;
   color: rgb(192, 42, 42);
 }
 
