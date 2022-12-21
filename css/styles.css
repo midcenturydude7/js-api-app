@@ -58,6 +58,10 @@ body {
   font-size: 1.25rem;
 }
 
+.header__coin-title {
+  text-align: center;
+}
+
 .header-img {
   border: none;
   border-radius: 25px;
