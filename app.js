@@ -47,10 +47,19 @@ function coinApi() {
     })
     .then((data) => {
       console.log(data);
+      const dailyCurrent = data.market_data.current_price.usd;
+      const dailyLow = data.market_data.low_24h.usd;
+      const dailyDiff = dailyCurrent - dailyLow;
+      const dailyAvg = (dailyCurrent + dailyLow) / 2;
+      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
+      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
+        <div class="header__coin-text">
+          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
+            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
@@ -86,10 +95,19 @@ function coinApi() {
     })
     .then((data) => {
       console.log(data);
+      const dailyCurrent = data.market_data.current_price.usd;
+      const dailyLow = data.market_data.low_24h.usd;
+      const dailyDiff = dailyCurrent - dailyLow;
+      const dailyAvg = (dailyCurrent + dailyLow) / 2;
+      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
+      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
+        <div class="header__coin-text">
+          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
+            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
@@ -125,10 +143,19 @@ function coinApi() {
     })
     .then((data) => {
       console.log(data);
+      const dailyCurrent = data.market_data.current_price.usd;
+      const dailyLow = data.market_data.low_24h.usd;
+      const dailyDiff = dailyCurrent - dailyLow;
+      const dailyAvg = (dailyCurrent + dailyLow) / 2;
+      const dailyAvgTotal = (dailyDiff / dailyAvg) * 100;
+      const dailyAvgNum = dailyAvgTotal.toFixed(3).slice(0, -1);
       headerCoinContainer.innerHTML += `
       <div class="header__coin-spacing">
         <img src=${data.image.small} class="header-img"/>
-        <div class="header__coin-text">${data.name}: $${data.market_data.current_price.usd}
+        <div class="header__coin-text">
+          <div class="header__coin-ticker">${data.symbol}: $${data.market_data.current_price.usd}
+            <span class="percentage-spacer"><i class="fa-solid fa-caret-up"></i></span> ${dailyAvgNum}%
+          </div>
           <div class="header__coin-data-container">
             <div class=".header__coin-price-left">
               <p class="header__coin-data padding">
