@@ -107,11 +107,6 @@ body {
   color: rgb(192, 42, 42);
 }
 
-.ticker-align {
-  text-align: right;
-}
-
-
 .header__coin-data-container {
   display: flex;
 }
@@ -150,6 +145,12 @@ body {
 }
 
 /* Weather Tracker */
+.header__weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header__weather-container {
   display: flex;
   flex-direction: column;

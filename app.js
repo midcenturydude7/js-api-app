@@ -8,6 +8,7 @@ const theTime = document.getElementById("the-time");
 const headerWeatherContainer = document.querySelector(
   ".header__weather-container"
 );
+const weatherLocation = document.querySelector(".weather-location");
 
 // API urls
 const urlBitcoin = "https://api.coingecko.com/api/v3/coins/bitcoin";
@@ -65,7 +66,7 @@ const cryptoApi = () => {
           <div class="header__coin-text">
             <div class="header__coin-ticker">
               <p>${data.symbol}: $${dailyCurrent}</p>
-              <p class="ticker-align">${
+              <p>${
                 percentageChange < 0
                   ? // eslint-disable-next-line quotes
                     `<span class="percentage-spacer-red"><i class="fa-solid fa-caret-down"></i></span>`
@@ -133,10 +134,6 @@ const getWeather = (lat, lon) => {
           <p class="weather-temp">${temp}°</p>
           <p class="weather-desc">${data.weather[0].description}</p>
         </div>
-        <div class="weather-location">
-          <p class="location-icon"><i class="fa-solid fa-location-dot"></i><p>
-          <p>${data.name}</p>
-        </div>
       `;
     })
     .catch((err) => console.log(err));
@@ -148,3 +145,19 @@ const testGeolocation = () => {
   });
 };
 console.log(testGeolocation());
+
+// Reverse Geocoding Javascript API Client
+const getCity = () => {
+  // eslint-disable-next-line no-undef
+  const reverseGeocoder = new BDCReverseGeocode();
+  reverseGeocoder.getClientLocation((result) => {
+    console.log(result.city);
+    weatherLocation.innerHTML = `
+      <div class="weather-location">
+        <p class="location-icon"><i class="fa-solid fa-location-dot"></i><p>
+        <p>${result.city}</p>
+      </div>
+    `;
+  });
+};
+getCity();
