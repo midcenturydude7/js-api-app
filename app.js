@@ -161,3 +161,11 @@ const getCity = () => {
   });
 };
 getCity();
+
+// function getApiLocation() {
+//   const urlLocation = "http://geodb-free-service.wirefreethought.com";
+//   fetch(urlLocation)
+//     .then((res) => res.json())
+//     .then((data) => console.log(data));
+// }
+// getApiLocation();
